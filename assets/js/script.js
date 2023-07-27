@@ -1,3 +1,5 @@
-//Knight or Sorcerer;
+let char = new Knight('K');
 
-//Little Monster ou BigMonster;
+console.log(char.name);
+console.log(char.life);
+console.log(char.attack);
