@@ -86,14 +86,15 @@ class BigMonster extends Character {
 class Stage {
     /*
     A arena vai receber os dados de 2Personagens e 2 Elementos dos personagens.
-    Os Elementos serão a parte visual da personagens na tela, que será atualizada
-    ao decorrer da batalha;
+    Os Elementos serão a parte visual dos personagens na tela, que será atualizada
+    ao decorrer da batalha e o log será a exibição das mensagens de descrição da luta;
     */
-    constructor(fighter1, fighter2, fighter1El, fighter2El) {
+    constructor(fighter1, fighter2, fighter1El, fighter2El, logObject) {
         this.fighter1 = fighter1;
         this.fighter2 = fighter2;
         this.fighter1El = fighter1El;
         this.fighter2El = fighter2El;
+        this.log = logObject;
     }
 
     //Inicializa o jogo;
@@ -125,33 +126,58 @@ class Stage {
     doAttack(attacking, attacked) {
 
         //Verifica se o ataque foi feito em um personagem que já morreu;
-        if(attacking.life <= 0 || attacked.life <= 0){
-            console.log('Respeite os mortos!');
+        if (attacking.life <= 0 && attacked.life > 0) {
+            this.log.addMessage('Mortos não lutam!');
+            return;
+        } else if (attacking.life > 0 && attacked.life <= 0) {
+            this.log.addMessage('Respeite os mortos!');
             return;
         }
 
         //Algoritmo que calcula o Fator de Ataque/Defesa dos personagens;
-        let attackFactor = (Math.random() *2).toFixed(2);
+        let attackFactor = (Math.random() * 2).toFixed(2);
         let defenseFactor = (Math.random() * 2).toFixed(2);
 
         /*
         Ataque e Defesa atuais, que são o Ataque/Defesa dos personagens,
         multiplicados pelo Fator de Ataque/Defesa dos personagens;
         */
-        let actualAttack = attacking.attack * attackFactor;
-        let actualDefense = attacked.defense * defenseFactor;
-        console.log("Attack: " + actualAttack);
-        console.log("Defense: " + actualDefense);
+        let actualAttack = (attacking.attack * attackFactor).toFixed(1);
+        let actualDefense = (attacked.defense * defenseFactor).toFixed(1);
 
-        //Verificação se o Ataque foi Defendido ou teve Exito;
-        if(actualAttack > actualDefense) {
-            attacked.life -= actualAttack;
-            console.log(`${attacking.name} causou ${actualAttack}`);
-        }else{
-            console.log(`${attacked.name} conseguiu defender..`);
+        //Verificação se o Ataquente/Atacado estão vivos;
+        if (attacking.life > 0 && attacked.life > 0) {
+            //Verificação se o Ataque foi Defendido ou teve Exito;
+            if (actualAttack > actualDefense) {
+                attacked.life -= actualAttack;
+                this.log.addMessage(`${attacking.name} causou ${actualAttack} de dano em ${attacked.name}.`);
+            } else {
+                this.log.addMessage(`${attacked.name} conseguiu defender o ataque de ${attacking.name}..`);
+            }
         }
 
         //Atualiza os elementos da tela com os novos status.
         this.update();
+    }
+}
+
+class Log {
+    list = [];
+
+    constructor(listEl) {
+        this.listEl = listEl;
+    }
+
+    addMessage(msg) {
+        this.list.push(msg);
+        this.render();
+    }
+
+    render() {
+        this.listEl.innerHTML = '';
+
+        for (let i in this.list) {
+            this.listEl.innerHTML += `<li>${this.list[i]}</li>`
+        }
     }
 }
