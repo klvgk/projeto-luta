@@ -125,7 +125,7 @@ class Stage {
     //Lógica por trás do calculo de Ataque e Defesa;
     doAttack(attacking, attacked) {
 
-        //Verifica se o ataque foi feito em um personagem que já morreu;
+        //Verifica se o ataque foi feito em/por um personagem que já morreu;
         if (attacking.life <= 0 && attacked.life > 0) {
             this.log.addMessage('Mortos não lutam!');
             return;
@@ -145,7 +145,7 @@ class Stage {
         let actualAttack = (attacking.attack * attackFactor).toFixed(1);
         let actualDefense = (attacked.defense * defenseFactor).toFixed(1);
 
-        //Verificação se o Ataquente/Atacado estão vivos;
+        //Verificação se o Atacante/Atacado estão vivos e diminui o HP do personagem;
         if (attacking.life > 0 && attacked.life > 0) {
             //Verificação se o Ataque foi Defendido ou teve Exito;
             if (actualAttack > actualDefense) {
@@ -161,6 +161,7 @@ class Stage {
     }
 }
 
+//Joga a narração da luta na tela;
 class Log {
     list = [];
 
