@@ -2,7 +2,7 @@
 
 ## :memo: Descrição
 Projeto Luta, utiliza conceitos de Orientação Objeto com Classes para criar um cenário de um combate de personagens.
-<br>
+<br><br>
 
 ## :books: Funcionalidades
 * Seleciona 2 personagens para batalhar baseados em status próprios e em um algoritmo que gera o fator de ataque e defesa de cada um;
@@ -21,13 +21,13 @@ Para rodar o projeto é necessário clonar o mesmo:
 git clone https://github.com/klvgk/projeto-luta.git
 ```
 E em seguida executar o index.html
-<br>
+<br><br>
 
 ## 👾 Deploy
 Projeto hospedado em:
 
 ✅ <a href="https://klvgk.github.io/projeto-luta/">Projeto Luta</a>
-<br>
+<br><br>
 
 ## :handshake: Colaboradores
 <table>
