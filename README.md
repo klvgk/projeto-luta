@@ -23,6 +23,12 @@ git clone https://github.com/klvgk/projeto-luta.git
 E em seguida executar o index.html
 <br>
 
+## 👾 Deploy
+Projeto hospedado em:
+
+✅ <a href="https://klvgk.github.io/projeto-luta/">Projeto Luta</a>
+<br>
+
 ## :handshake: Colaboradores
 <table>
   <tr>
